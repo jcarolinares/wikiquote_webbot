@@ -12,14 +12,29 @@ after_name=False #Controls the order of the name: XXhXXm-nombre_archivo.gcode or
 keywords_text=""
 
 
+#Terminal parameter
+if __name__ == '__main__':
+
+    #print(len(sys.argv))
+
+    if len(sys.argv) >= 1:
+        list_keywords=sys.argv
+        list_keywords.remove("terminal_wikiquote_webbot.py")
+
+        for element in list_keywords:
+            keywords_text=keywords_text+" "+str(element)
+
+#print (keywords_text)
+keywords=keywords_text
+
 #Global variables
 language={"spanish":"es","english":"en","italian":"it","polish":"pl","turkish":"tr","french":"fr","russian":"ru","german":"de","bulgarian":"bg","chinese":"zh"}
 quotes=[]#The quotes container
 
-print("WIKIQUOTE WEBBOT\n\n")
+#print("WIKIQUOTE WEBBOT\n\n")
 
-keywords=input("Please enter the keywords quote\n")
-print("\n\nQUOTES\n")
+#keywords=input("Please enter the keywords quote\n")
+#print("\n\nQUOTES\n")
 
 #Functions
 def print_quotes(number_of_quote):#Where -1 is all the quotes and -2 a random quote
@@ -50,4 +65,4 @@ for actual_quote in list_of_quotes:
 	quotes.append(actual_quote.get_text())
 	#print(actual_quote.get_text())
 
-print_quotes(-1)
+print_quotes(-2)
