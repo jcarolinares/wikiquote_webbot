@@ -19,6 +19,13 @@ python3 terminal_wikiquote_webbot.py Terry Pratchett
 
 Every time you'll open a new terminal, the program will show a random quote based in the given keywords
 
+You can also put a mix of different search quotes, just put commas between the different theme quote. As an example:
+
+python3 terminal_wikiquote_webbot.py Terry Pratchett, Asimov
+
+The terminal will put a random quote about Terry Pratchett or Asimov
+
+
 
 Made by Julián Caro Linares
 
