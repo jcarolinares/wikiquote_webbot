@@ -6,15 +6,20 @@ import requests
 import random
 import sys
 
-route="."
-counter=0
-after_name=False #Controls the order of the name: XXhXXm-nombre_archivo.gcode or nombre_archivo-XXhXXm.gcode
-keywords_text=""
+class quote:
+    def new(self,about,content):
+        self.about=about
+        self.content=content
+
+    def show_quote(self):
+        print (self.content+"\n")
+        print("Quote about: "+self.about+"\n\n")
 
 
 #Global variables
 language={"spanish":"es","english":"en","italian":"it","polish":"pl","turkish":"tr","french":"fr","russian":"ru","german":"de","bulgarian":"bg","chinese":"zh"}
-quotes=[]#The quotes container
+quotes_objects=[]#The quotes container
+
 
 print("WIKIQUOTE WEBBOT\n\n")
 
@@ -33,17 +38,15 @@ def print_quotes(number_of_quote):#Where -1 is all the quotes and -2 a random qu
         key_string=key_string+" "+key_local
 
     if number_of_quote==-1:
-        for quote in quotes:
-            print(quote+"\n\n"+"Quote about: "+str(key_string)+"\n\n")
+        for quote in quotes_objects:
+            quote.show_quote()
     elif number_of_quote==-2:
-        print(random.choice(quotes)+"\n\n"+"Quote about: "+str(key_string)+"\n\n")
+        random.choice(quotes_objects).show_quote()
     else:
-        print(quotes[number_of_quote]+"\n\n"+"Quote about: "+str(key_string)+"\n\n")
+        quotes_objects[number_of_quote].show_quote()
 
-
+#Main script
 for key in keywords:
-
-    #Main script
 
     #Downloading the page
     r  = requests.get('http://'+language["english"]+'.wikiquote.org/wiki/'+key)
@@ -57,7 +60,9 @@ for key in keywords:
     #Quotes
     #for actual_quote in web_body:
     for actual_quote in list_of_quotes:
-    	quotes.append(actual_quote.get_text())
-    	#print(actual_quote.get_text())
+        auxiliar_object=quote()
+        auxiliar_object.new(key,actual_quote.get_text())
+        quotes_objects.append(auxiliar_object)
+        #auxiliar_object.show_quote()
 
 print_quotes(-1)
